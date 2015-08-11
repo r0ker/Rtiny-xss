@@ -15,7 +15,7 @@
 ├── README.md(项目说明)
 ```
 
-默认js模块 支持屏幕截屏，在线控制，源码读取，探针
+默认js模块支持屏幕截屏，在线控制，源码读取，探针
 
 ### 安装与使用
 
@@ -24,9 +24,12 @@
   - python 2.7
   - nginx
   - torndb
+  - mysql
   - sockjs-tornado(https://github.com/mrjoes/sockjs-tornado)
   - supervisor(非必须，但强烈建议)
 - 搭建
+  - 导入Rtiny.sql
+  
   - **必须使用nginx反向代理**
   
     其配置如下
