@@ -96,13 +96,11 @@
   
   将Template类的构造函数中 这几行注释掉。
   
-  ···
+  ```
   if compress_whitespace is None:
-5
         compress_whitespace = name.endswith(".html") or \
-6
             name.endswith(".js")
-  ···
+  ```
   
   - API
     - module
