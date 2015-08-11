@@ -108,17 +108,17 @@
       
       若异步，请使用ajax post receive参数 到项目地址(支持json)
       + AJAX 
-      ···
+      ```
       ajax({
 					'type': 'POST/GET',
 					'url': 'xxx',
 					'data': "xxx",
 		  });
-      ···
-      + dom加载后执行 ···domready(function(){xx}） ···
-      + 不用当心低版本ie浏览器不支持 json， 放心的使用他吧。
+      ```
+      + dom加载后执行 ```domready(function(){xx}） ```
+      + 不用担心低版本ie浏览器不支持 json， 放心的使用它吧。
       
     - console
-      + 获取数据 Rtinyget(document.cookie)
-      + 更新截图 pic(window.document.body,'')
+      + 获取数据 ```Rtinyget(document.cookie)```
+      + 更新截图 ```pic(window.document.body,'')```
   
