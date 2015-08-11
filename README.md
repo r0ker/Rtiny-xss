@@ -123,3 +123,5 @@
       + 获取数据 ```Rtinyget(document.cookie)```
       + 更新截图 ```pic(window.document.body,'')```
   
+    - project
+     - {id}m 删减截屏代码 减少体积
