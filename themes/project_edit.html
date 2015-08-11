@@ -1,0 +1,129 @@
+{% extends "main.html" %}
+{% block body %}
+										<script>
+                                            function change0(){
+                                                $("#status").val("0");
+                                            }
+                                            function change1(){
+                                                $("#status").val("1");
+                                            }
+											function checkdel(id){
+												if(document.getElementById(id).checked){
+												$("#"+id+"custom").attr("name","modulecustom")
+												}else{
+												$("#"+id+"custom").attr("name","xx")
+												}
+                                            }
+											
+                                        </script>
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Edit</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+
+                        <form action="http://{{url}}/project/{{row['id']}}/edit" method="post" class="form-horizontal">
+                            <div class="control-group">
+                                <label class="control-label">Name :</label>
+                                <div class="controls">
+                                    <input type="text" class="span11" placeholder="Project name"  name='name' value="{{urlde(row['name'])}}" required/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Description :</label>
+                                <div class="controls">
+                                    <input type="text" class="span11" placeholder="Description" name='description' value="{{urlde(row['description'])}}"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Email :</label>
+                                <div class="controls">
+                                    <input type="email" class="span11" placeholder="Send email" name='email' value="{{row['email']}}"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Custom :</label>
+                                <div class="controls">
+                                    <textarea class="span11" rows='13' placeholder="alert('Rtiny')" name='custom' >{{urlde(row['custom'])}}</textarea>
+                                    <span class="help-block">Description field</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Filtered IP :</label>
+                                <div class="controls">
+                                    <input type="text" class="span11" placeholder="such as 127.0.0.1;" name='fip' value="{{row['fip']}}"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Filtered url or keyword :</label>
+                                <div class="controls">
+                                    <input type="text" class="span11" placeholder="such as www.baidu.com;baidu.com" name='furl' value="{{row['furl']}}"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label for="checkboxes" class="control-label">Status:</label>
+                                <div class="controls">
+                                    <div data-toggle="buttons-radio" class="btn-group">
+                                         <button class="btn btn-primary {%if row['status']%}active{%end%}" type="button" onclick="change1()">On</button>
+                                        <button class="btn btn-primary {%if not row['status']%}active{%end%}" type="button" onclick="change0()">Off</button>
+										<input type="hidden" name="status" id="status" value="{{row['status']}}">
+                                        
+
+                                    </div>
+                                </div>
+                            </div>
+								<div class="control-group">
+                                <label for="checkboxes" class="control-label">Select Modules :</label>
+								{%for module in modules%}
+							
+                                <div class="controls">
+                                    <div class="widget-title bg_ly" data-toggle="collapse" href="#module{{module['id']}}c"><span class="icon"><i class="icon-chevron-down"></i></span>
+                                        <h5>{{urlde(module['name'])}}</h5>
+                                    </div>
+                                    <div class="widget-content nopadding collapse " style="left: 36px" id="module{{module['id']}}c">
+                                        <div>
+										
+										<input type="checkbox"  id="{{module['id']}}" name="moduleid" value="{{module['id']}}" onclick="checkdel('{{module['id']}}')"/>
+										
+										{%if getmcustom(module['code'])%}
+										
+                                            <label class="control-label span1" style="width: 60px;text-align: left;left: 60px;padding-top: 36px">Custom :</label>
+                                                <div class="span6" style="padding-top: 6px;">
+                                                <textarea  id="{{module['id']}}custom" rows='3' placeholder="alert('Rtiny')" style="width: 600px" name="xx"></textarea>
+                                                <span class="help-block">{%for i in getmcustom(module['code'])%}{{i}}  ,{%end%}</span></div>
+										{%else%}
+										    <input type="hidden" id="{{module['id']}}custom" name="xx" value="">
+										{%end%}
+                                        </div>
+                                    </div>
+                                </div>
+							{%end%}
+								</div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-success">Save</button>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+                </div>
+        </div>
+    </div>
+	<script>
+		{%for key in pmodules%}
+	document.getElementById("{{key}}").checked=true
+	{%end%}
+	window.onload=function(){
+	{%for key in pmodules%}
+	$("#{{key}}custom").attr("name","modulecustom")
+	$("#module{{key}}c").attr("class","widget-content nopadding collapse in")
+	$("#{{key}}custom").append("{{pmodules[key]}}")
+	{%end%}
+	}
+	
+	</script>
+{% end %}
