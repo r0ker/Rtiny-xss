@@ -6,7 +6,7 @@
 ```
 ├── rtiny(控制器，配置文件以及函数)
   |—— ...
-  |—— config.php(配置文件)
+  |—— config.py(配置文件)
 ├── themes(模板与静态文件)
   |——static(静态文件)
   |——get.html(默认js模块)
