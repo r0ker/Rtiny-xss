@@ -15,12 +15,13 @@ logging.getLogger().setLevel(logging.DEBUG)
 settings = {
 	"static_path": os.path.join(os.path.dirname(__file__), "themes/static"),
 	"template_path": os.path.join(os.path.dirname(__file__), "themes"),
-	"cookie_secret": "M0m2dD/MQFYfczYpUbJoyrkp6qYoI2hRw2jc=",
+	"cookie_secret": "M0ehO260Qm2dD/MQFYfczYpUbJoyrkp6qYoI2hRw2jc=",
 	"login_url": "/login",
 	"debug": True,
 }
 
 SockRouter = sockjs.tornado.SockJSRouter(rtiny.sock.SockConnection, r'/sock')
+	
 application = tornado.web.Application([
 	(r"/", rtiny.main.MainHandler),
 	(r"/login", rtiny.login.LoginHandler),
@@ -31,8 +32,9 @@ application = tornado.web.Application([
 	(r"/host[/]?(\d{1,3})?[/]?(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?[/]?(\d{1,3})?[/]?(del)?[/]?", rtiny.host.HostHandler),
 	(r"/online", rtiny.online.OnlineHandler),
 	(r"/(\d{1,4})(m)?", rtiny.get.GetHandler),
+	(r"/swf", rtiny.swf.SwfHandler),
 	(r"/console[/](\d{1,5})", rtiny.console.ConsoleHandler),] + SockRouter.urls + [(r".*", rtiny.error.ErrorHandler)], **settings)
 	
 if __name__ == "__main__":
-	application.listen('888', '127.0.0.1')
+	application.listen('7753', '127.0.0.1')
 	tornado.ioloop.IOLoop.instance().start()

@@ -755,8 +755,8 @@ Information=function(){
 	}else{
 		info.Plugins=Plugins();
 	}
-	info.java="'" + navigator.javaEnabled() +"'";
-	info.flash="'" + flashChecker() + "'";
+	info.java = navigator.javaEnabled();
+	info.flash = flashChecker();
 	info.location=window.location.href;
 	try{
 	info.toplocation=window.top.location.href;}catch(e){info.toplocation=e}
