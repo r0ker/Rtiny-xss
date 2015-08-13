@@ -1,0 +1,59 @@
+{% extends "main.html" %}
+{% block body %}
+
+        <div class="row-fluid">
+            <div class="span12">
+
+
+
+                <div class="widget-box">
+                    <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+                        <h5>Total : {{datainfo['onlinen']}}</h5>
+                         </div>
+                    <div class="widget-content ">
+                        <table class="table table-bordered table-striped table-hover data-table with-check">
+                            <thead>
+                            <tr>
+                                <th class="span2">Host IP</th>
+                                <th class="span4"> Information </th>
+                                <th class="span2"> Come from </th>
+                                <th class="span1"> Number </th>
+                                <th class="span1"> Update time </th>
+                                <th class="span1"> Operation </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+							{%for online in row%}
+                            <tr>
+                                <td style="padding-top: 40px"> <a href='http://{{url}}/host/{{online['projectid']}}/{{online['hostip']}}'>{{online['hostip']}}</a> </td>
+                                <td style="text-align: left">   
+								     <ul>
+									{% set info = urljson(online['information'])%}
+                                        <li>location:{{info['location']}}</li>
+                                        <li>toplocation:{{info['toplocation']}}</li>
+                                        <li>Browser: {{info['Browser']}}&nbsp;&nbsp;&nbsp;Os：{{info['Os']}}&nbsp;&nbsp;&nbsp;flash: {{info['flash']}}&nbsp;&nbsp;&nbsp;java: {{info['java']}}</li>
+                                        <li>title:{{info['title']}}</li>
+                                    </ul>
+								
+								</td>
+                                <td style="padding-top: 40px">   <a href="">{{getname(online['projectid'])}}</a></td>
+
+                                <td style="padding-top: 40px"> {{gethostn(online['hostip'])}} </td>
+                                <td style="padding-top: 40px"> {{timede(online['addtime'])}} </td>
+                                <td style="padding-top: 40px">
+                                    <button type="button" class="btn btn-default" title="View" onclick="window.location.href='http://{{url}}/host/{{online['projectid']}}/{{online['hostip']}}'"><span class="icon-eye-open"></span></button>
+                                    <button type="button" class="btn btn-default" title="Console" onclick="window.location.href='http://{{url}}/console/{{online['id']}}'"><span class="icon-random"></span></button>
+
+                                </td>
+								{%end%}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+{% end %}

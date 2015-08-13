@@ -1,0 +1,84 @@
+{% extends "main.html" %}
+{% block body %}
+<script>
+function getCookie(name) {
+    var c = document.cookie.match("\\b" + name + "=([^;]*)\\b");
+    return c ? c[1] : undefined;
+}
+
+function del(checkBoxLikeName){
+		test = document.getElementsByTagName("INPUT");
+		testValue="";
+		for (i = 0; i < test.length ; i ++ )
+		{
+			if(test[i].type == "checkbox" && test[i].name.indexOf(checkBoxLikeName)!= -1 ){
+				testValue +=test[i].value+",";
+			}
+		}
+		testValue=testValue.substring(0,testValue.length-1);
+				$.ajax({
+                               type: "post",
+                               url: "http://{{url}}/project/del",
+                               error: function(){alert('请刷新后重新操作');},
+                               data: "id="+testValue,
+                              datatype:"html",
+                             timeout: 5000,
+                             success: function(msg)
+
+                               {
+
+                                   window.location.href="http://{{url}}/project"
+
+                               }
+
+                              })
+	
+	}
+</script>
+<div class="row-fluid">
+<div class="span12">
+<div class="widget-box">
+    <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+        <h5>Total : {{prown}}</h5>
+		<a href="http://{{url}}/project/add"><span class="label"><i class='icon-plus'></i>Add</span></a>
+        <a href="#" onclick="del('project')"><span class="label"><i class='icon-remove'></i>del</span></a>
+        </div>
+    <div class="widget-content ">
+        <table class="table table-bordered table-striped table-hover data-table with-check">
+            <thead>
+            <tr>
+                <th class="span1"><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
+                <th class="span2">Project name</th>
+                <th class="span4"> Description </th>
+                <th class="span2"> Url </th>
+                <th class="span1"> Number/Online </th>
+                <th class="span1"> Create time </th>
+                <th class="span1"> Operation </th>
+            </tr>
+            </thead>
+            <tbody>
+			{% for prow in prows %}
+            <tr>
+                <td><input type="checkbox"  name="project" value="{{prow['id']}}"/></td>
+                <td> <a href="http://{{url}}/project/{{prow['id']}}/">{{urlde(prow['name'])}}</a></td>
+                <td> {{urlde(prow['description'])}}</td>
+                <td> http://{{url}}/{{prow['id']}}</td>
+                <td> {{hrown[prow['id']]}}/{{hrowno[prow['id']]}} </td>
+                <td> {{timede(prow['addtime'])}} </td>
+                <td>
+                    <button type="button" class="btn btn-default" title="Del" onclick="window.location.href='http://{{url}}/project/{{prow['id']}}/del'"><span class="icon-trash"></span></button>
+                    <button type="button" class="btn btn-default" title="Setting" onclick="window.location.href='http://{{url}}/project/{{prow['id']}}/edit'"><span class="icon-pencil"></span></button>
+                    <button type="button" class="btn btn-default" title="View" onclick="window.location.href='http://{{url}}/project/{{prow['id']}}/view'"><span class="icon-eye-open"></span></button>
+
+                </td>
+            </tr>
+            {% end %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+</div>
+</div>
+  {% end %}

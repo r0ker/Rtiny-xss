@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lock </title>
+
+	<link rel="stylesheet" href="{{ static_url("css/bootstrap.min.css")}}" />
+	<link rel="stylesheet" href="{{ static_url("css/style.css")}}" />
+	<link rel="stylesheet" href="{{ static_url("font-awesome/css/font-awesome.css")}}" />
+</head>
+
+<body class="lock-screen" onload="startTime()">
+
+    <div class="lock-wrapper">
+
+        <div id="time"></div>
+
+
+        <div class="lock-box text-center">
+            <img src="{{ static_url("img/lock.gif")}}" alt="lock avatar"/>
+            <h1></h1>
+            <span class="locked">System Locked</span>
+            <form role="form" class="form-inline" action="" method="post">
+                <div class="form-group col-lg-12">
+                    <input type="password" placeholder="Password" id="exampleInputPassword2" class="form-control lock-input" name='password'>
+                    <button class="btn btn-lock" type="submit">
+                        <i class="icon-arrow-right"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        function startTime()
+        {
+            var today=new Date();
+            var h=today.getHours();
+            var m=today.getMinutes();
+            var s=today.getSeconds();
+            // add a zero in front of numbers<10
+            m=checkTime(m);
+            s=checkTime(s);
+            document.getElementById('time').innerHTML=h+":"+m+":"+s;
+            t=setTimeout(function(){startTime()},500);
+        }
+
+        function checkTime(i)
+        {
+            if (i<10)
+            {
+                i="0" + i;
+            }
+            return i;
+        }
+    </script>
+</body>
+</html>

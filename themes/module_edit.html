@@ -1,0 +1,41 @@
+{% extends "main.html" %}
+{% block body %}
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Edit</h5>
+                     </div>
+                     <div class="widget-content nopadding">
+                        <form action="http://{{url}}/module/{{row['id']}}/edit" method="post" class="form-horizontal">
+						{% raw xsrf_form_html() %}
+                            <div class="control-group">
+                                <label class="control-label">Title :</label>
+                                <div class="controls">
+                                    <input type="text" class="span11" placeholder="Module name" name='name'  value="{{urlde(row['name'])}}" required/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Description :</label>
+                                <div class="controls">
+                                        <input type="text" class="span11" placeholder="Description" name='description' value="{{urlde(row['description'])}}"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                    <label class="control-label">Code :</label>
+                                    <div class="controls">
+                                        <textarea class="span11" rows='23' placeholder="alert('Rtiny')" name='code' required>{%raw urlde(row['code'])%}</textarea>
+                                        <span class="help-block">Description field</span>
+                                    </div>
+                            </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-success">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+{% end %}

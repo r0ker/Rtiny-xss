@@ -1,0 +1,97 @@
+{% extends "main.html" %}
+{% block body %}
+<script>
+function del(checkBoxLikeName,hostip){
+	if (typeof(hostip)=='undefined'){
+		test = document.getElementsByTagName("INPUT");
+		testValue="";
+		for (i = 0; i < test.length ; i ++ )
+		{
+			if(test[i].type == "checkbox" && test[i].name.indexOf(checkBoxLikeName)!= -1 ){
+				testValue +=test[i].value+",";
+			}
+		}
+		testValue=testValue.substring(0,testValue.length-1);}else{
+		testValue=hostip
+		}
+				$.ajax({
+                               type: "post",
+                               url: "./del",
+                               error: function(){alert('请刷新后重新操作');},
+                               data: "hostip="+testValue,
+                              datatype:"html",
+                             timeout: 5000,
+                             success: function(msg)
+
+                               {
+
+                                   window.location.href="./"
+
+                               }
+
+                              })
+	
+	}
+</script>
+
+</script>
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+                        <h5>Total : {{hostn}}</h5>
+                        <a href="edit/"><span class="label"><i class='icon-pencil'></i>Setting</span></a>
+                        <a href="#" onclick="del('host')"><span class="label"><i class='icon-remove'></i>Del</span></a>
+                    </div>
+                    <div class="widget-content ">
+                        <table class="table table-bordered table-striped table-hover data-table with-check">
+                            <thead>
+                            <tr>
+                                <th class="span1"><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
+
+                                <th class="span2">Host IP</th>
+                                <th class="span4"> Information </th>
+                                <th class="span1"> Number</th>
+                                <th class="span1"> Online</th>
+                                <th class="span1"> Update time </th>
+                                <th class="span1"> Operation </th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+							{% for host in hosts%}
+                            <tr>
+                                <td><input type="checkbox" name="host" value="{{host['hostip']}}"/></td>
+                                <td style="padding-top: 40px"> <a href="http://{{url}}/host/{{host['projectid']}}/{{host['hostip']}}">{{host['hostip']}}<br>{{getaddr(host['hostip'])}}</a></td>
+                                <td style="text-align: left">
+                                    <ul>
+									{% set info = urljson(host['information'])%}
+                                        <li>location:{{info['location']}}</li>
+                                        <li>toplocation:{{info['toplocation']}}</li>
+                                        <li>Browser: {{info['Browser']}}&nbsp;&nbsp;&nbsp;Os：{{info['Os']}}&nbsp;&nbsp;&nbsp;flash: {{info['flash']}}&nbsp;&nbsp;&nbsp;java: {{info['java']}}</li>
+                                        <li>title:{{info['title']}}</li>
+									
+                                    </ul>
+                                </td>
+
+                                <td style="padding-top: 40px"> {{gethostn(host['hostip'])}}</td>
+                                <td style="padding-top: 40px"> {% if host['online']==1%}Yes{% else %}No{% end %}</td>
+
+                                <td style="padding-top: 40px"> {{timede(host['addtime'])}} </td>
+                                <td style="padding-top: 40px">
+                                    <button type="button" class="btn btn-default" title="Del" onclick="del('host','{{host['hostip']}}')"><span class="icon-trash"></span></button>
+                                    <button type="button" class="btn btn-default" title="View" onclick="window.location.href='http://{{url}}/host/{{host['projectid']}}/{{host['hostip']}}'"><span class="icon-eye-open"></span></button>
+                                    <button type="button" class="btn btn-default" title="Console" onclick="window.location.href='http://{{url}}/console/{{host['id']}}'" {% if host['online']==0%}disabled{%end%}><span class="icon-random"></span></button>
+
+                                </td>
+                            </tr>
+                           {%end%}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% end %}
