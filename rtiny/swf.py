@@ -7,8 +7,9 @@ import os
 
 
 class SwfHandler(BaseHandler):
-	def get(self):
+	def set_default_headers(self):
 		self.set_header ('Content-Type', 'application/x-shockwave-flash')
+	def get(self):
 		file =  os.path.join(os.path.dirname(__file__), "../swf.swf")
 		with open(file, 'r') as f:
 			while True:
