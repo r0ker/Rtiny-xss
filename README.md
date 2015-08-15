@@ -16,6 +16,30 @@
 ```
 
 默认js模块支持屏幕截屏，在线控制，源码读取，探针
+  - API
+    - module
+      + 自定义参数 ```{set.*}```
+      + 接收数据 ```Rtinysend.xx = xx;```
+      
+      若异步，请使用ajax post receive参数 到项目地址(支持json)
+      + AJAX 
+      ```
+      ajax({
+					'type': 'POST/GET',
+					'url': 'xxx',
+					'data': "xxx",
+		  });
+      ```
+      + dom加载后执行 ```domready(function(){xx}） ```
+      + 不用担心低版本ie浏览器不支持 json， 放心的使用它吧。
+      
+    - console
+      + 获取数据 ```Rtinyget(document.cookie)```
+      + 更新截图 ```pic(window.document.body,'')```
+  
+    - project
+     - {id}m 删减截屏代码 减少体积
+     - 支持swf。 url/swf.swf?id=projectid
 
 ### 安装与使用
 
@@ -102,26 +126,4 @@
             name.endswith(".js")
   ```
   
-  - API
-    - module
-      + 自定义参数 ```{set.*}```
-      + 接收数据 ```Rtinysend.xx = xx;```
-      
-      若异步，请使用ajax post receive参数 到项目地址(支持json)
-      + AJAX 
-      ```
-      ajax({
-					'type': 'POST/GET',
-					'url': 'xxx',
-					'data': "xxx",
-		  });
-      ```
-      + dom加载后执行 ```domready(function(){xx}） ```
-      + 不用担心低版本ie浏览器不支持 json， 放心的使用它吧。
-      
-    - console
-      + 获取数据 ```Rtinyget(document.cookie)```
-      + 更新截图 ```pic(window.document.body,'')```
-  
-    - project
-     - {id}m 删减截屏代码 减少体积
+
