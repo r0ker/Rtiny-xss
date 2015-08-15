@@ -126,6 +126,6 @@
             name.endswith(".js")
   ```
   
-------------------------------------------
-修改rtiny/config.py
-index.py 配置监听端口。
+  
+  - 修改rtiny/config.py
+  - index.py 配置监听端口。
