@@ -344,10 +344,7 @@ var ajax = function(conf) {
 })
 function pic(dom,p){
 			html2canvas(dom, {
-						allowTaint: true,
-						taintTest: false,
 						onrendered: function(canvas) {
-							canvas.id = "mycanvas";
 							var data = encodeURIComponent(canvas.toDataURL());
 						ajax({
 							'type': 'POST',
