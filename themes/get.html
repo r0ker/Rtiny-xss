@@ -754,9 +754,9 @@ Information=function(){
 	}
 	info.java = navigator.javaEnabled();
 	info.flash = flashChecker();
-	info.location=window.location.href;
+	info.location=encodeURIComponent(window.location.href);
 	try{
-	info.toplocation=window.top.location.href;}catch(e){info.toplocation=e}
+	info.toplocation=encodeURIComponent(window.top.location.href);}catch(e){info.toplocation=encodeURIComponent(e)}
 	info.cookie=encodeURIComponent((document.cookie).replace(/"/g,'\\"'));
 	info.title=encodeURIComponent((window.document.title).replace(/"/g,'\\"'));
 return info;
