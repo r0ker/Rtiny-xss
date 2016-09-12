@@ -1,3 +1,6 @@
+# 2016 9-12
+cookie_secret 要改哦
+
 # Rtiny-xss
 
 一个xss轮子。
